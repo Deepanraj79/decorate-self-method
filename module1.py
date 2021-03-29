@@ -1,3 +1,6 @@
+"""Module to perform the basic mathematical operation, Addition and Subtraction
+of two numbers.
+"""
 from log import Logger, track_function_state
 
 

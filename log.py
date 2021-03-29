@@ -1,4 +1,4 @@
-"""Logger Initialization
+"""Module to initialize the logger
 
 References of creating Logger class following the singleton pattern:
 
@@ -17,19 +17,23 @@ class SingletonType(type):
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
             cls._instances[cls] = super(SingletonType, cls).__call__(*args, **kwargs)
+
         return cls._instances[cls]
 
 
 class MyLogger(metaclass=SingletonType):
+
     _logger = None
+    _LOG_LEVEL = os.getenv('LOG_LEVEL', 'DEBUG')
 
     def __init__(self):
-        self._logger = logging.getLogger("crumbs")
-        self._logger.setLevel(logging.DEBUG)
+        self._logger = logging.getLogger("my_app")
+        self._logger.setLevel(self._LOG_LEVEL)
         formatter = logging.Formatter(
             '%(asctime)s [%(levelname)s | %(filename)s:%(lineno)s] %(message)s'
         )
 
+        # Code block for storing the logs into the file.
         # now = datetime.datetime.now()
         # dir_name = "./log"
         # if not os.path.isdir(dir_name):
@@ -49,11 +53,16 @@ class MyLogger(metaclass=SingletonType):
 
 
 class Logger:
-
+    """Base class to invoke the logger instance. This can be inherited into the
+    child when you want to have the logger as instance attribute of your child class.
+    """
     logger = MyLogger.__call__().get_logger()
 
 
 def track_function_state(source_func):
+    """Function which can be used for decorator of the instance method of
+    class which can has the logger attribute.
+    """
     @functools.wraps(source_func)
     def wrapper(self, *args, **kwargs):
         function_name = source_func.__name__

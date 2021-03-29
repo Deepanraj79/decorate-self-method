@@ -1,3 +1,5 @@
+"""Root/Main module to execute the test functions to verify the logging"""
+
 from module1 import AddSub
 from module2 import MulDiv
 
