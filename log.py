@@ -1,10 +1,4 @@
-"""Module to initialize the logger
-
-References of creating Logger class following the singleton pattern:
-
-https://gist.github.com/huklee/cea20761dd05da7c39120084f52fcc7c
-https://www.semicolonworld.com/question/42958/creating-a-singleton-in-python
-"""
+"""Module to initialize the logger"""
 import os
 import datetime
 import logging
