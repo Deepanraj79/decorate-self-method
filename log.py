@@ -60,8 +60,8 @@ class Logger:
 
 
 def track_function_state(source_func):
-    """Function which can be used for decorator of the instance method of
-    class which can has the logger attribute.
+    """Function which can be used as a decorator for an instance method of
+    the class which has the logger as a instance attribute.
     """
     @functools.wraps(source_func)
     def wrapper(self, *args, **kwargs):
@@ -69,6 +69,7 @@ def track_function_state(source_func):
         self.logger.debug(f"{function_name} - starts")
         ret = source_func(self, *args, **kwargs)
         self.logger.debug(f"{function_name} - ends")
+
         return ret
 
     return wrapper
